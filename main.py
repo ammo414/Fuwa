@@ -49,5 +49,5 @@ async def on_message(message):
         await message.channel.send(netflixmalurl(message.content))
 
 
-client.run('ODMwNDg5OTUzMTY3MjEyNTY0.YHHcCg.wADQvjbM9xpp9I1YbHOJ-a46My8')
+client.run('TOKEN')
 
