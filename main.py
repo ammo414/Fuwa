@@ -5,7 +5,7 @@ from jikanpy import Jikan
 import re
 
 
-def vrvmalurl(vrvlink):
+def vrv(vrvlink):
     jikan = Jikan()
     page = requests.get(vrvlink)
     soup = bs(page.content, 'html.parser')
@@ -14,14 +14,21 @@ def vrvmalurl(vrvlink):
     return mallink
 
 
-def funimalurl(funilink):
+def funimation(funilink):
     jikan = Jikan()
     title = funilink.replace('https://www.funimation.com/shows/', '').replace('-', ' ')[:-1].strip()
     mallink = jikan.search('anime', title)['results'][0]['url']
     return mallink
 
 
-def netflixmalurl(netflixlink):
+def crunchyroll(crunchylink):
+    jikan = Jikan()
+    title = crunchylink.replace('https://www.crunchyroll.com/', '').replace('-', ' ').strip()
+    mallink = jikan.search('anime', title)['results'][0]['url']
+    return mallink
+
+
+def netflix(netflixlink):
     url = re.findall('https:.*$', netflixlink)
     jikan = Jikan()
     page = requests.get(url[0])
@@ -42,12 +49,13 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if 'vrv' in message.content:
-        await message.channel.send(vrvmalurl(message.content))
+        await message.channel.send(vrv(message.content))
     elif 'funimation' in message.content:
-        await message.channel.send(funimalurl(message.content))
+        await message.channel.send(funimation(message.content))
     elif 'netflix' in message.content:
-        await message.channel.send(netflixmalurl(message.content))
+        await message.channel.send(netflix(message.content))
 
 
 client.run('TOKEN')
+
 
