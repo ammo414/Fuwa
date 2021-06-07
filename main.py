@@ -52,10 +52,9 @@ async def on_message(message):
         await message.channel.send(vrv(message.content))
     elif 'funimation' in message.content:
         await message.channel.send(funimation(message.content))
+    elif 'crunchyroll' in message.content:
+        await message.chanel.send(crunchyroll(message.content))
     elif 'netflix' in message.content:
         await message.channel.send(netflix(message.content))
 
-
 client.run('TOKEN')
-
-
